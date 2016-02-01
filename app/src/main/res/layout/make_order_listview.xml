@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#46aacf">
+    <!--android:background="@android:color/background_light">-->
+    <!--android:background="#33da76"-->
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:id="@+id/timeOrder_textview_listview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="25dp"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/number_machine_textview_listview"
+        android:text="number_machine"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:paddingEnd="20dp"
+        android:textSize="20dp"
+        android:textColor="@android:color/background_light" />
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="item"
+    android:drawableLeft="@drawable/arrow_left_2"
+    android:drawableRight="@drawable/arrow_right_2"
+    android:textColor="#ffffff"
+    android:textSize="20dp"
+
+
+    android:id="@+id/editText_menu">
+
+</TextView>
