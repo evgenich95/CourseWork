@@ -1,4 +1,4 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.helper;
 
 import android.view.View;
 import android.widget.TextView;

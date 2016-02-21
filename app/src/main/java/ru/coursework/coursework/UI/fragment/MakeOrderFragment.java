@@ -1,4 +1,4 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.UI.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
@@ -29,54 +28,79 @@ import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import ru.coursework.coursework.entity.MakeOrderFragmentMemento;
+import ru.coursework.coursework.entity.Memento;
+import ru.coursework.coursework.helper.Helper;
+import ru.coursework.coursework.entity.Order;
+import ru.coursework.coursework.R;
 
 
 /**
  * Created by Anton on 19.11.2015.
  */
-public class MakeOrderFragment extends Fragment {
+public class MakeOrderFragment extends CustomFragment {
 
     public static final int REQUEST_DATE = 0;
 
     private static final String DIALOG_DATE = "DialogDate";
     public static final String NEW_ORDER_FOR_SAFE = "NewOrderForSafe";
 
-    private Date date;
+    //переменные уровня View
     private TextView dateTextView;
     private ListView mlistView;
-    private ArrayList<Order> WeekOfOrders;
-    Order ord;
+
+    //переменные уровня Модель
+    private Date date;
+    private ArrayList<Order> weekOfOrders;
+    private Order order;
+
+
+    @Override
+    public Memento createMemento() {
+
+        return new MakeOrderFragmentMemento();
+    }
+
+    public void setMemento(Memento state2){
+        //проверку класса на соотвествие с нужным хранителем
+        MakeOrderFragmentMemento state = (MakeOrderFragmentMemento)state2;
+
+            this.date = state.getDate();
+            this.weekOfOrders = state.getWeekOfOrders();
+            this.order = state.getOrder();
+
+    }
 
     static class ViewHolder {
         @Bind(R.id.timeOrder_textview_listview) TextView TimeOrder;
-        @Bind(R.id.number_machine_textview_listview) TextView numberMachine;
 
+        @Bind(R.id.number_machine_textview_listview) TextView numberMachine;
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        getActivity().setTitle("");
+
+        if (date == null)
+            date= new Date();
+
     }
 
     private class OrderAdapter extends ArrayAdapter<Order> {
+
+
         public OrderAdapter(ArrayList<Order> orders) {
             super(getActivity(), 0, orders);
 
         }
 
-
         public View getView(int position, View convertView, ViewGroup parent) {
-            // Если мы не получили представление, заполняем его
-//            if (convertView == null) {
-//                convertView = getActivity().getLayoutInflater().inflate(R.layout.make_order_listview, null);
-//            }
-//
-//
-//            TextView TimeOrder = (TextView) convertView.findViewById(R.id.timeOrder_textview_listview);
-//
-//            TextView numberMachine = (TextView) convertView.findViewById(R.id.number_machine_textview_listview);
-//            numberMachine.setText("Стиральная машина №" + ord.getNumber_machine());
-//
-
-
 
             ViewHolder holder;
             if (convertView != null) {
@@ -87,28 +111,20 @@ public class MakeOrderFragment extends Fragment {
                 convertView.setTag(holder);
             }
 
-
             Order ord = getItem(position);
-
-
 
             holder.TimeOrder.setText(ord.getTitle());
             holder.numberMachine.setText("Стиральная машина №" + ord.getNumber_machine());
 
-
-
-
             return convertView;
-
-
         }
 
+
+
+
+
+
     }
-
-
-
-
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.make_order, container, false);
@@ -117,7 +133,7 @@ public class MakeOrderFragment extends Fragment {
         //Формируем список времени при первом создания Activity ( начальная дата)
         CreateWeekOrders(date);
 
-        OrderAdapter adapter = new OrderAdapter(WeekOfOrders);
+        OrderAdapter adapter = new OrderAdapter(weekOfOrders);
 
         mlistView = (ListView) v.findViewById(R.id.listViewTime);
 
@@ -128,7 +144,7 @@ public class MakeOrderFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
 
-                ord = WeekOfOrders.get(position);
+                order = weekOfOrders.get(position);
 
                 View v = LayoutInflater.from(getActivity())
                         .inflate(R.layout.dialog_for_makeorder_listview, null);
@@ -141,8 +157,8 @@ public class MakeOrderFragment extends Fragment {
 
 
                 Helper.updateTextViewbyDate(holder.DialogDateOrder, date);
-                holder.DialogNumberMashineOrder.setText("Стиральная машина №" + String.valueOf(ord.getNumber_machine()));
-                holder.DialogTimeOrder.setText(ord.getTitle());
+                holder.DialogNumberMashineOrder.setText("Стиральная машина №" + String.valueOf(order.getNumber_machine()));
+                holder.DialogTimeOrder.setText(order.getTitle());
 
                 Dialog dialog = new AlertDialog.Builder(getActivity())
                         .setView(v)
@@ -150,7 +166,7 @@ public class MakeOrderFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent i = new Intent();
-                                i.putExtra(NEW_ORDER_FOR_SAFE, ord);
+                                i.putExtra(NEW_ORDER_FOR_SAFE, order);
                                 getActivity().setResult(getActivity().RESULT_OK,i);
                                 getActivity().finish();
                             }
@@ -163,33 +179,18 @@ public class MakeOrderFragment extends Fragment {
 
         return v;
     }
-
     static class SuccessDialogHolder {
         @Bind(R.id.dialog_date_textview) TextView DialogDateOrder;
         @Bind(R.id.dialog_time_textview) TextView DialogTimeOrder;
+
+
         @Bind(R.id.dialog_number_mashine_textview) TextView DialogNumberMashineOrder;
-
-
         public SuccessDialogHolder(View view) {
             ButterKnife.bind(this, view);
         }
-    }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        getActivity().setTitle("");
-        date= new Date();
 
 
     }
-
-
-
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -253,7 +254,7 @@ public class MakeOrderFragment extends Fragment {
     }
 
     private void CreateWeekOrders (Date date){
-        WeekOfOrders = new ArrayList<Order>();
+        weekOfOrders = new ArrayList<Order>();
 
         for (int i = 1; i <= 7; i++) {
             Order ord = new Order();
@@ -261,7 +262,7 @@ public class MakeOrderFragment extends Fragment {
             ord.setTitle(String.valueOf(9 + i)+":00");
             ord.setNumber_machine(new Random().nextInt(13) + 1);
 
-            WeekOfOrders.add(ord);
+            weekOfOrders.add(ord);
         }
 
 

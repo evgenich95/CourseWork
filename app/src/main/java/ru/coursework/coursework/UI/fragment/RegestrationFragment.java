@@ -1,19 +1,32 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.UI.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.graphics.drawable.DrawableWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ru.coursework.coursework.R;
+import ru.coursework.coursework.UI.LogInActivity;
+import ru.coursework.coursework.entity.Memento;
+
 /**
  * Created by Anton on 25.11.2015.
  */
-public class RegestrationFragment extends Fragment {
+public class RegestrationFragment extends CustomFragment {
+
+    @Override
+    public Memento createMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento state) {
+
+    }
 
     @Nullable
     @Override

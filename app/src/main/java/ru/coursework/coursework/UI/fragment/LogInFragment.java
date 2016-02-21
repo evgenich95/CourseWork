@@ -1,4 +1,4 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.UI.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,15 +8,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+
+import ru.coursework.coursework.R;
+import ru.coursework.coursework.UI.ListOrderActivity;
+import ru.coursework.coursework.UI.RegestrationActivity;
+import ru.coursework.coursework.entity.Memento;
 
 /**
  * Created by Anton on 24.11.2015.
  */
-public class LogInFragment extends Fragment {
+public class LogInFragment extends CustomFragment {
 
     Button mLoginButton;
     Button mRegestrationButton;
+
+    @Override
+    public Memento createMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento state) {
+
+    }
 
     @Nullable
     @Override

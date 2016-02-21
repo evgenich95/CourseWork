@@ -1,17 +1,11 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.UI;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.List;
+import ru.coursework.coursework.UI.fragment.CustomFragment;
+import ru.coursework.coursework.UI.fragment.ListOrderFragment;
 
 /**
  * Created by Anton on 18.10.2015.
@@ -20,7 +14,7 @@ public class ListOrderActivity extends SingleFragmentActivity {
 
 
     @Override
-    protected Fragment createFragment() {
+    protected CustomFragment createFragment() {
         return new ListOrderFragment();
 
 

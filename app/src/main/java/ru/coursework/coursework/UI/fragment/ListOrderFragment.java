@@ -1,4 +1,4 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.UI.fragment;
 
 
 import android.app.Activity;
@@ -23,31 +23,43 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import ru.coursework.coursework.entity.Client;
+import ru.coursework.coursework.entity.Memento;
+import ru.coursework.coursework.helper.Helper;
+import ru.coursework.coursework.entity.Order;
+import ru.coursework.coursework.entity.OrderLab;
+import ru.coursework.coursework.R;
+import ru.coursework.coursework.UI.MakeOrderActivity;
 
 /**
  * Created by Anton on 18.10.2015.
  */
-public class ListOrderFragment extends Fragment {
+public class ListOrderFragment extends CustomFragment {
 
 
     private ViewFragment holder;
 
     public static final int REQUEST_ORDER = 0;
 
-    private ListView mlistView;
-    private ArrayList<Order> Orders;
-    Client ExampleClient;
-    ArrayList<View> views;
+    private ArrayList<Order> orders;
+    private Client client;
+    private ArrayList<View> views;
+
+
+    @Override
+    public Memento createMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento state) {
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -56,8 +68,8 @@ public class ListOrderFragment extends Fragment {
 
         if (requestCode==REQUEST_ORDER){
 
-            ExampleClient.setCurrentOrder((Order) data.getParcelableExtra(MakeOrderFragment.NEW_ORDER_FOR_SAFE));
-            UpdateDataOfClient(ExampleClient.getCurrentOrder());
+            client.setCurrentOrder((Order) data.getParcelableExtra(MakeOrderFragment.NEW_ORDER_FOR_SAFE));
+            UpdateDataOfClient(client.getCurrentOrder());
 
 
 
@@ -155,10 +167,10 @@ public class ListOrderFragment extends Fragment {
 
         getActivity().setTitle(R.string.title_ListOrderActivity);
 
-        Orders = OrderLab.Instance(getActivity()).getOrders();
+        orders = OrderLab.Instance(getActivity()).getOrders();
 
-        ExampleClient = new Client();
-        ExampleClient.setPastOrder(Orders);
+        client = new Client();
+        client.setPastOrder(orders);
 
 
         View view = LayoutInflater.from(getActivity())
@@ -168,11 +180,11 @@ public class ListOrderFragment extends Fragment {
         holder = new ViewFragment(view);
         view.setTag(holder);
 
-        if (ExampleClient.getCurrentOrder()!=null)
-                UpdateDataOfClient(ExampleClient.getCurrentOrder());
+        if (client.getCurrentOrder()!=null)
+                UpdateDataOfClient(client.getCurrentOrder());
 
 
-        OrderAdapter adapter = new OrderAdapter(ExampleClient.getPastOrder());
+        OrderAdapter adapter = new OrderAdapter(client.getPastOrder());
 
 
         holder.mlistView.setAdapter(adapter);
@@ -293,12 +305,6 @@ public class ListOrderFragment extends Fragment {
 
     private void UpdateDataOfClient ( Order order){
 
-//        View view = LayoutInflater.from(getActivity())
-//                .inflate(R.layout.listorder,null);
-
-//        ViewFragment holder = new ViewFragment(view);
-//        view.setTag(holder);
-
         holder.TimeOrder.setText(order.getTitle());
         holder.NumberMachine.setText("Стиральная машина №" + order.getNumber_machine());
         Helper.updateTextViewbyDate(holder.DateOrder, order.getDate());
@@ -309,10 +315,6 @@ public class ListOrderFragment extends Fragment {
         holder.DateOrder.setVisibility(View.VISIBLE);
 
         holder.NotHaveOrder.setVisibility(View.INVISIBLE);
-
-
-//        return view;
-
 
     }
 

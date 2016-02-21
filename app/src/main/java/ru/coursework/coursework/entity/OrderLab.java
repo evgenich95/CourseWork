@@ -1,14 +1,11 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.entity;
 
 import android.content.Context;
-
-import java.sql.Time;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
-import java.util.UUID;
 
 /**
  * Created by Anton on 22.10.2015.

@@ -1,4 +1,4 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.UI.fragment;
 
 
 import android.app.Activity;
@@ -14,12 +14,10 @@ import android.view.View;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+
+import ru.coursework.coursework.R;
 
 /**
  * Created by Anton on 20.11.2015.

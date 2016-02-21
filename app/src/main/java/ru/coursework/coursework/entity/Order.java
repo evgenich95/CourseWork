@@ -1,4 +1,4 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.entity;
 
 
 import android.os.Parcel;
@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Anton on 20.10.2015.

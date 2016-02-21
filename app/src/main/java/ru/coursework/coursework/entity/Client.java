@@ -1,7 +1,6 @@
-package ru.coursework.coursework;
+package ru.coursework.coursework.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Anton on 05.12.2015.
