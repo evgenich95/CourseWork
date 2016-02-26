@@ -7,7 +7,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -80,7 +79,7 @@ public class ListOrderFragment extends Fragment implements ISaveStateFragment {
 
         if (requestCode==REQUEST_ORDER){
 
-            client.setCurrentOrder((Order) data.getSerializableExtra(MakeOrderFragmentI.NEW_ORDER_FOR_SAFE));
+            client.setCurrentOrder((Order) data.getSerializableExtra(MakeOrderFragment.NEW_ORDER_FOR_SAFE));
             UpdateDataOfClient(client.getCurrentOrder());
         }
     }

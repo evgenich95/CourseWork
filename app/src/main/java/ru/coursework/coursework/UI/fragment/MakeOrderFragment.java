@@ -39,7 +39,7 @@ import ru.coursework.coursework.R;
 /**
  * Created by Anton on 19.11.2015.
  */
-public class MakeOrderFragmentI extends Fragment implements ISaveStateFragment {
+public class MakeOrderFragment extends Fragment implements ISaveStateFragment  {
 
     //константы
     public static final int REQUEST_DATE = 0;
@@ -225,7 +225,7 @@ public class MakeOrderFragmentI extends Fragment implements ISaveStateFragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(date);
-                dialog.setTargetFragment(MakeOrderFragmentI.this,REQUEST_DATE);
+                dialog.setTargetFragment(MakeOrderFragment.this,REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
