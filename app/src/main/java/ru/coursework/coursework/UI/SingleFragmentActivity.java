@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import ru.coursework.coursework.R;
 import ru.coursework.coursework.UI.fragment.ISaveStateFragment;
-import ru.coursework.coursework.entity.IMemento;
+import ru.coursework.coursework.entity.Memento.IMemento;
 
 /**
  * Created by Anton on 18.10.2015.
@@ -17,8 +17,9 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
     protected IMemento state;
+
     private Fragment fragment;
-    protected Boolean needSave;
+    private Boolean needSave;
 
 
     @Override

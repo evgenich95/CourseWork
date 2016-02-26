@@ -29,8 +29,8 @@ import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import ru.coursework.coursework.entity.MakeOrderFragmentIMemento;
-import ru.coursework.coursework.entity.IMemento;
+import ru.coursework.coursework.entity.Memento.MakeOrderFragmentIMemento;
+import ru.coursework.coursework.entity.Memento.IMemento;
 import ru.coursework.coursework.helper.Helper;
 import ru.coursework.coursework.entity.Order;
 import ru.coursework.coursework.R;
@@ -78,6 +78,7 @@ public class MakeOrderFragment extends Fragment implements ISaveStateFragment  {
     }
 
     //Конец реализации
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

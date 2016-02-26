@@ -1,4 +1,4 @@
-package ru.coursework.coursework.entity;
+package ru.coursework.coursework.entity.Memento;
 
 import android.os.Bundle;
 

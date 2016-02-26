@@ -1,7 +1,9 @@
-package ru.coursework.coursework.entity;
+package ru.coursework.coursework.entity.Memento;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import ru.coursework.coursework.entity.Order;
 
 /**
  * Created by Anton on 21.02.2016.
