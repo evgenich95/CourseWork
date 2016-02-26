@@ -2,7 +2,6 @@ package ru.coursework.coursework.UI;
 
 import android.support.v4.app.Fragment;
 
-import ru.coursework.coursework.UI.fragment.CustomFragment;
 import ru.coursework.coursework.UI.fragment.RegestrationFragment;
 
 /**
@@ -11,7 +10,8 @@ import ru.coursework.coursework.UI.fragment.RegestrationFragment;
 public class RegestrationActivity extends SingleFragmentActivity {
 
     @Override
-    protected CustomFragment createFragment() {
+    protected Fragment createFragment() {
         return new RegestrationFragment();
     }
+
 }

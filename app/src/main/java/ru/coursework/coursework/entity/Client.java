@@ -1,11 +1,12 @@
 package ru.coursework.coursework.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Anton on 05.12.2015.
  */
-public class Client {
+public class Client implements Serializable{
 
     private int id;
     private int NumberOfRoom;

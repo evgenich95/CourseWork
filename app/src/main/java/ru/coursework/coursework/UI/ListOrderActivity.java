@@ -4,8 +4,7 @@ import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.View;
 
-import ru.coursework.coursework.UI.fragment.CustomFragment;
-import ru.coursework.coursework.UI.fragment.ListOrderFragment;
+import ru.coursework.coursework.UI.fragment.ListOrderFragmentI;
 
 /**
  * Created by Anton on 18.10.2015.
@@ -14,11 +13,8 @@ public class ListOrderActivity extends SingleFragmentActivity {
 
 
     @Override
-    protected CustomFragment createFragment() {
-        return new ListOrderFragment();
-
-
-
+    protected Fragment createFragment() {
+        return new ListOrderFragmentI();
     }
 
     @Override
@@ -26,8 +22,6 @@ public class ListOrderActivity extends SingleFragmentActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
 
     }
-
-    //
 }
 
 

@@ -6,12 +6,18 @@ import java.util.Date;
 /**
  * Created by Anton on 21.02.2016.
  */
-public class MakeOrderFragmentMemento implements Memento {
+public class MakeOrderFragmentIMemento implements IMemento {
 
     private Date date;
     private ArrayList<Order> weekOfOrders;
     private Order order;
 
+
+    public MakeOrderFragmentIMemento(Date date, ArrayList<Order> weekOfOrders, Order order) {
+        this.date=date;
+        this.weekOfOrders=weekOfOrders;
+        this.order=order;
+    }
 
     public Date getDate() {
         return date;

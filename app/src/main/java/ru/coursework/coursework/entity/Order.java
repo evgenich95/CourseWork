@@ -5,12 +5,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Anton on 20.10.2015.
  */
-public class Order implements Parcelable  {
+public class Order implements Serializable {
 
 
     final static String LOG_TAG = "myLogs";
@@ -23,7 +24,7 @@ public class Order implements Parcelable  {
     private boolean current; // запись явл. действующей или старой
     private boolean withIncident;
 
-    @Override
+   /* @Override
     public int describeContents() {
         return 0;
     }
@@ -64,7 +65,7 @@ public class Order implements Parcelable  {
         public Order[] newArray(int size) {
             return new Order[size];
         }
-    };
+    };*/
 
     public int getNumber_machine() {
         return number_machine;

@@ -29,7 +29,8 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ru.coursework.coursework.entity.Client;
-import ru.coursework.coursework.entity.Memento;
+import ru.coursework.coursework.entity.IMemento;
+import ru.coursework.coursework.entity.ListOrderFragmentIMemento;
 import ru.coursework.coursework.helper.Helper;
 import ru.coursework.coursework.entity.Order;
 import ru.coursework.coursework.entity.OrderLab;
@@ -39,26 +40,35 @@ import ru.coursework.coursework.UI.MakeOrderActivity;
 /**
  * Created by Anton on 18.10.2015.
  */
-public class ListOrderFragment extends CustomFragment {
+public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
 
-
-    private ViewFragment holder;
-
+    //константы
     public static final int REQUEST_ORDER = 0;
 
+    //переменные уровня View
+    private ArrayList<View> views;
+    private ViewFragment holder;
+
+    //переменные уровня Модель
     private ArrayList<Order> orders;
     private Client client;
-    private ArrayList<View> views;
+
 
 
     @Override
-    public Memento createMemento() {
-        return null;
+    public IMemento createMemento() {
+        return new ListOrderFragmentIMemento(orders,client);
     }
 
     @Override
-    public void setMemento(Memento state) {
+    public void setMemento(IMemento state) {
 
+        if (state instanceof ListOrderFragmentIMemento) {
+
+            ListOrderFragmentIMemento individualState = (ListOrderFragmentIMemento) state;
+            this.orders = individualState.getOrders();
+            this.client = individualState.getClient();
+        }
     }
 
     @Override
@@ -68,7 +78,7 @@ public class ListOrderFragment extends CustomFragment {
 
         if (requestCode==REQUEST_ORDER){
 
-            client.setCurrentOrder((Order) data.getParcelableExtra(MakeOrderFragment.NEW_ORDER_FOR_SAFE));
+            client.setCurrentOrder((Order) data.getSerializableExtra(MakeOrderFragmentI.NEW_ORDER_FOR_SAFE));
             UpdateDataOfClient(client.getCurrentOrder());
 
 
@@ -80,8 +90,6 @@ public class ListOrderFragment extends CustomFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.list_order_fragment, menu);
-
-
     }
 
     @Override
@@ -90,8 +98,6 @@ public class ListOrderFragment extends CustomFragment {
 //        убираем вызов меню, т.к. исп ImageView
 //        setHasOptionsMenu(true);
     }
-
-
 
 
     private class OrderAdapter extends ArrayAdapter<Order> {
@@ -122,21 +128,13 @@ public class ListOrderFragment extends CustomFragment {
 //                //            }
 //              withIcidentImage.setVisibility(View.VISIBLE);
 
-
-
-
             TextView numberMachine = (TextView) convertView.findViewById(R.id.list_item_order_numberMachTextView);
             numberMachine.setText("Стиральная машина №" + ord.getNumber_machine());
             return convertView;
 
-
         }
 
     }
-
-
-
-
 
     static class ViewFragment {
 
@@ -151,27 +149,23 @@ public class ListOrderFragment extends CustomFragment {
         @Bind(R.id.imageViewRedact) ImageView imageViewRedact;
         @Bind(R.id.imageViewDelete) ImageView imageViewDelete;
 
-
-
-
         public ViewFragment(View view) {
             ButterKnife.bind(this, view);
         }
     }
 
-
-    //
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         getActivity().setTitle(R.string.title_ListOrderActivity);
 
-        orders = OrderLab.Instance(getActivity()).getOrders();
+        //если мы ещё не создавали клиента, то создаём его для примера
+        if (client == null){
 
-        client = new Client();
-        client.setPastOrder(orders);
-
+            orders = OrderLab.Instance(getActivity()).getOrders(); //список прошлых записей
+            client = new Client();
+            client.setPastOrder(orders);
+        }
 
         View view = LayoutInflater.from(getActivity())
                 .inflate(R.layout.listorder, null);
@@ -189,10 +183,8 @@ public class ListOrderFragment extends CustomFragment {
 
         holder.mlistView.setAdapter(adapter);
 
-//        holder.addOrderImageView.
 
-
-        //Создадим массис View видимость которых надо будет изменять
+        //Создадим массив Views, видимость которых надо будет изменять
         views = new ArrayList<View>();
 
         views.add(holder.imageViewDelete);
@@ -202,8 +194,7 @@ public class ListOrderFragment extends CustomFragment {
         views.add(holder.NumberMachine);
         views.add(holder.TimeOrder);
 
-
-
+        //кнопка добавление нового текущей записи
         holder.addOrderImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,7 +205,7 @@ public class ListOrderFragment extends CustomFragment {
 
 
 
-
+        //при долгом нажатии на текущую запись
         holder.currentblock.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -248,20 +239,17 @@ public class ListOrderFragment extends CustomFragment {
                 DialogView.setId(R.id.deleteOrNo);
                 DialogView = ll;
 
-                ;
-
-
-
-
-                //holder.NotHaveOrder.setVisibility(View.VISIBLE);
+                //вызываем диалог для подтверждения текущий записи
                 Dialog dialog = new AlertDialog.Builder(getActivity())
                         .setView(DialogView)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //при подтверждении удаляем текущий заказ клиента
+                                client.setCurrentOrder(null);
                                 //скрываем все данные
-
                                 Helper.changeViewVisible(views, View.INVISIBLE);
+
                                 //показываем, что записей нет
                                 holder.NotHaveOrder.setVisibility(View.VISIBLE);
                                 holder.currentblock.setBackgroundColor(getResources().getColor(R.color.white));
@@ -271,25 +259,11 @@ public class ListOrderFragment extends CustomFragment {
                         .setNegativeButton(android.R.string.cancel,null)
                         .create();
                 dialog.show();
-
-
-
             }
         });
 
-
-
-
-
-
-
-
         return view;
-
-
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -317,8 +291,6 @@ public class ListOrderFragment extends CustomFragment {
         holder.NotHaveOrder.setVisibility(View.INVISIBLE);
 
     }
-
-
 }
 
 
