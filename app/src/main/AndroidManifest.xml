@@ -29,7 +29,7 @@
         </activity>
 
         <activity
-            android:name=".UI.RegestrationActivity"
+            android:name=".UI.RegistrationActivity"
             android:label="@string/app_name"
             android:parentActivityName=".UI.LogInActivity">
         </activity>

@@ -18,32 +18,34 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
     protected IMemento state;
     private Fragment fragment;
-    private ISaveStateFragment originator;
     protected Boolean needSave;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //шаблонный метод
         setContentView(R.layout.activity_main);
         FragmentManager fm = getSupportFragmentManager();
         fragment =  fm.findFragmentById(R.id.fragmentContainer);
         if (fragment == null) {
-            fragment = createFragment();
+            fragment = createFragment(); //каждый потомок возвращает свой Fragment
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, fragment)
                     .commit();
         }
 
+        //Реализация паттерна Memento
+
         //определяем, нужно ли сохранять состояние управляемого фрагмента
         if (fragment instanceof ISaveStateFragment) {
             needSave = true;
-            originator = (ISaveStateFragment) fragment;
 
             //если мы что-то сохранили в пакет аргументов класса
             if (savedInstanceState != null) {
                 this.state = (IMemento) savedInstanceState.getSerializable(KEY_STATE);
-                RestoreState();
+                restoreState();
             }
         }
         else {
@@ -57,7 +59,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
 
         if (needSave) {
-            SaveState();
+            saveState();
             outState.putSerializable(KEY_STATE, this.state);
         }
 
@@ -65,18 +67,20 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     }
 
 
-    public void RestoreState(){
+    public void restoreState(){
 
         if (this.state != null) {
-            originator.setMemento(this.state);
+            ((ISaveStateFragment) fragment).setMemento(this.state);
             this.state = null;
         }
     }
-    public void SaveState() {
+    public void saveState() {
 
-        this.state = originator.createMemento();
+        this.state = ((ISaveStateFragment) fragment).createMemento();
 
     }
+
+    //Конец реализации
 }
 
 

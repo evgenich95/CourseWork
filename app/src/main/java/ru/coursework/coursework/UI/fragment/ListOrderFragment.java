@@ -40,7 +40,7 @@ import ru.coursework.coursework.UI.MakeOrderActivity;
 /**
  * Created by Anton on 18.10.2015.
  */
-public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
+public class ListOrderFragment extends Fragment implements ISaveStateFragment {
 
     //константы
     public static final int REQUEST_ORDER = 0;
@@ -49,12 +49,12 @@ public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
     private ArrayList<View> views;
     private ViewFragment holder;
 
-    //переменные уровня Модель
+    //переменные уровня Model
     private ArrayList<Order> orders;
     private Client client;
 
 
-
+    //Начало реализации паттерна Memento
     @Override
     public IMemento createMemento() {
         return new ListOrderFragmentIMemento(orders,client);
@@ -62,7 +62,7 @@ public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
 
     @Override
     public void setMemento(IMemento state) {
-
+        //проверка класса на соотвествие с нужным хранителем
         if (state instanceof ListOrderFragmentIMemento) {
 
             ListOrderFragmentIMemento individualState = (ListOrderFragmentIMemento) state;
@@ -70,6 +70,8 @@ public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
             this.client = individualState.getClient();
         }
     }
+
+    //Конец реализации
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -80,9 +82,6 @@ public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
 
             client.setCurrentOrder((Order) data.getSerializableExtra(MakeOrderFragmentI.NEW_ORDER_FOR_SAFE));
             UpdateDataOfClient(client.getCurrentOrder());
-
-
-
         }
     }
 
@@ -91,14 +90,6 @@ public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.list_order_fragment, menu);
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        убираем вызов меню, т.к. исп ImageView
-//        setHasOptionsMenu(true);
-    }
-
 
     private class OrderAdapter extends ArrayAdapter<Order> {
         public OrderAdapter(ArrayList<Order> orders) {
@@ -239,7 +230,7 @@ public class ListOrderFragmentI extends Fragment implements ISaveStateFragment {
                 DialogView.setId(R.id.deleteOrNo);
                 DialogView = ll;
 
-                //вызываем диалог для подтверждения текущий записи
+                //вызываем диалог
                 Dialog dialog = new AlertDialog.Builder(getActivity())
                         .setView(DialogView)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

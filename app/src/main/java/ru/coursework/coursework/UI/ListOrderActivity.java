@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.View;
 
-import ru.coursework.coursework.UI.fragment.ListOrderFragmentI;
+import ru.coursework.coursework.UI.fragment.ListOrderFragment;
 
 /**
  * Created by Anton on 18.10.2015.
@@ -14,7 +14,7 @@ public class ListOrderActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new ListOrderFragmentI();
+        return new ListOrderFragment();
     }
 
     @Override

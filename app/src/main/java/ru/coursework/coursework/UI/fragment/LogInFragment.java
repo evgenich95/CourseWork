@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import ru.coursework.coursework.R;
 import ru.coursework.coursework.UI.ListOrderActivity;
-import ru.coursework.coursework.UI.RegestrationActivity;
+import ru.coursework.coursework.UI.RegistrationActivity;
 
 /**
  * Created by Anton on 24.11.2015.
@@ -39,7 +39,7 @@ public class LogInFragment extends Fragment {
         mRegestrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), RegestrationActivity.class);
+                Intent i = new Intent(getActivity(), RegistrationActivity.class);
                 startActivity(i);
             }
         });

@@ -50,12 +50,13 @@ public class MakeOrderFragmentI extends Fragment implements ISaveStateFragment {
     private TextView dateTextView;
     private ListView mlistView;
 
-    //переменные уровня Модель
+    //переменные уровня Model
     private Date date;
     private ArrayList<Order> weekOfOrders;
     private Order order;
 
 
+    //Начало реализации паттерна Memento
     @Override
     public IMemento createMemento() {
 
@@ -76,6 +77,7 @@ public class MakeOrderFragmentI extends Fragment implements ISaveStateFragment {
 
     }
 
+    //Конец реализации
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,7 +7,7 @@ import ru.coursework.coursework.UI.fragment.RegestrationFragment;
 /**
  * Created by Anton on 25.11.2015.
  */
-public class RegestrationActivity extends SingleFragmentActivity {
+public class RegistrationActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
