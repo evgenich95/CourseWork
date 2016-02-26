@@ -135,7 +135,7 @@ public void saveState() {
 ```
 ## Структура:
 
-[img]
+![TitleFragment](./images/struct.png)
 
 ## Результаты применения паттерна:
 
