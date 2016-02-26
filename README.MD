@@ -114,6 +114,7 @@ public interface ISaveStateFragment {
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
 >Вызывается в начале создания Activity
+
 ``` java 
 public void restoreState(){
 
@@ -123,8 +124,9 @@ public void restoreState(){
     }
 }
 ```
- 
+
 > Вызывается в начале удаления Activity
+
 ``` java
 public void saveState() {
 
