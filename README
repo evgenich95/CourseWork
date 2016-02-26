@@ -1,4 +1,4 @@
-# Паттерн “Memento”
+﻿# Паттерн “Memento”
 
 ----
 ## Проблема:
@@ -144,29 +144,3 @@ public void saveState() {
 - [x] Сохраняется инкапсуляция состояния Fragment-ов.
 - [x] Можно с лёгостью выбирать какие именно фрагменты сохранять, реализуя в них интерфейс ISaveStateFragment
 - [x] Простое и безболезненное расширение классов Activity 
-
-
-
-
-----
-## markdown quick reference
-# headers
-
-*emphasis*
-
-**strong**
-
-* list
-
->block quote
-
-    code (4 spaces indent)
-[links](http://wikipedia.org)
-
-----
-## changelog
-* 17-Feb-2013 re-design
-
-----
-## thanks
-* [markdown-js](https://github.com/evilstreak/markdown-js)
