@@ -140,7 +140,7 @@ public void saveState() {
 ### Стуктурное решение по сохранению **Fragment**-а [MakeOrderFragment][MakeOrderFragment]:
 ![struct](./images/struct.png)
 ---
-[Так же можете посмотреть общую структуру, касаемой реализации паттерна "Memento"][allStruct]
+[Так же можете посмотреть общую структуру приложения, касаемой реализации паттерна "Memento"][allStruct]
 ---
 
 ## Результаты применения паттерна:
