@@ -49,11 +49,13 @@ public class MakeOrderFragment extends Fragment implements ISaveStateFragment  {
     //переменные уровня View
     private TextView dateTextView;
     private ListView mlistView;
+    private OrderAdapter adapter;
 
     //переменные уровня Model
     private Date date;
     private ArrayList<Order> weekOfOrders;
     private Order order;
+
 
 
     //Начало реализации паттерна Memento
@@ -135,9 +137,11 @@ public class MakeOrderFragment extends Fragment implements ISaveStateFragment  {
 
 
         //Формируем список времени при первом создания Activity ( начальная дата)
-        CreateWeekOrders(date);
+        if (weekOfOrders==null)
+            weekOfOrders = CreateWeekOrders(date);
 
-        OrderAdapter adapter = new OrderAdapter(weekOfOrders);
+//        OrderAdapter adapter = new OrderAdapter(weekOfOrders);
+         adapter = new OrderAdapter(weekOfOrders);
 
         mlistView = (ListView) v.findViewById(R.id.listViewTime);
 
@@ -228,6 +232,11 @@ public class MakeOrderFragment extends Fragment implements ISaveStateFragment  {
                 DatePickerFragment dialog = DatePickerFragment.newInstance(date);
                 dialog.setTargetFragment(MakeOrderFragment.this,REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
+
+                weekOfOrders = CreateWeekOrders(date);
+                mlistView.setAdapter(new OrderAdapter(weekOfOrders));
+
+
             }
         });
 
@@ -241,16 +250,17 @@ public class MakeOrderFragment extends Fragment implements ISaveStateFragment  {
 
     }
 
-    private void CreateWeekOrders (Date date){
-        weekOfOrders = new ArrayList<Order>();
-
-        for (int i = 1; i <= 7; i++) {
+    private ArrayList<Order> CreateWeekOrders (Date date){
+        ArrayList<Order> weekOfOrders = new ArrayList<Order>();
+        Random generator = new Random();
+        for (int i = 1; i <=generator.nextInt(7)+1 ; i++) {
             Order ord = new Order();
             ord.setDate(date);
-            ord.setTitle(String.valueOf(9 + i)+":00");
+            ord.setTitle(String.valueOf(generator.nextInt(23))+":00");
             ord.setNumber_machine(new Random().nextInt(13) + 1);
 
             weekOfOrders.add(ord);
         }
+        return weekOfOrders;
     }
 }
