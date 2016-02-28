@@ -137,8 +137,10 @@ public void saveState() {
 }
 ```
 ## Структура:
-
+### Стуктурное решение по сохранению **Fragment**-а [MakeOrderFragment][MakeOrderFragment]:
 ![struct](./images/struct.png)
+> Так же можете посмотреть общую структуру, касаемой реализации паттерна "Memento"
+> [Общая структура][allStruct]
 
 ## Результаты применения паттерна:
 
@@ -177,5 +179,5 @@ public void saveState() {
  [ListOrderFragmentIMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/ListOrderFragmentIMemento.java>
  [MakeOrderFragmentIMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/MakeOrderFragmentIMemento.java>
  [appProblem]: <https://drive.google.com/file/d/0B0KGha8XVO0LWUJQdDBYNm5fMjg/view?usp=sharing>
- []: <>
+ [allStruct]: <https://github.com/evgenich95/CourseWork/blob/master/images/allStruct.png?raw=true>
  []: <>
