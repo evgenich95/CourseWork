@@ -101,9 +101,9 @@ ___
 
 Алгоритм наложения Activity на себя Fragment-а будет отличаться только типом накладываемого Fragment-а. Следовательно, чтобы вынести повторяющийся код, применим паттерн “Шаблонный метод”.
 
-Инкапсулируем алгоритм в операцию  ```onCreate()``` абстрактного класса ```SingleFragmentActivity```, и определяем примитивную операцию ```createFragment()```. 
+Инкапсулируем алгоритм в операцию  ```onCreate()``` абстрактного класса [SingleFragmentActivity][SingleFragmentActivity], и определяем примитивную операцию ```createFragment()```. 
 
-Необходимо, чтобы Fragment-ы, состояние которых надо сохранить, подчинялись общему интерфейсу – ```IsaveStateFragment``` , который состоит из 2 операций:
+Необходимо, чтобы Fragment-ы, состояние которых надо сохранить, подчинялись общему интерфейсу – [IsaveStateFragment][IsaveStateFragment], который состоит из 2 операций:
 
 
 ``` java 
@@ -115,13 +115,14 @@ public interface ISaveStateFragment {
 
 }
 ```
-Это позволит реализовать 2 операции для получения и возвращения Хранителя на абстрактном уровне в ```SingleFragmentActivity``` .
+Это позволит реализовать 2 операции для получения и возвращения Хранителя на абстрактном уровне в [SingleFragmentActivity][SingleFragmentActivity] .
 
-public abstract class SingleFragmentActivity extends AppCompatActivity {
 
->Вызывается в начале создания Activity
 
 ``` java 
+public abstract class SingleFragmentActivity extends AppCompatActivity {
+
+//Вызывается в начале создания Activity
 public void restoreState(){
 
     if (this.state != null) {
@@ -131,9 +132,10 @@ public void restoreState(){
 }
 ```
 
-> Вызывается в начале удаления Activity
+
 
 ``` java
+//Вызывается в начале удаления Activity
 public void saveState() {
 
     this.state = ((ISaveStateFragment) fragment).createMemento();
@@ -150,13 +152,22 @@ public void saveState() {
 - [x] Поддержка сохранения между поворотами экрана просто и понятна, при этом заполняться это состояния только 1 раз.
 - [x] Экономит время работы системы, особенно в случае загрузке большого кол-ва данных.
 - [x] Сохраняется инкапсуляция состояния Fragment-ов.
-- [x] Можно с лёгостью выбирать какие именно фрагменты сохранять, реализуя в них интерфейс ISaveStateFragment
+- [x] Можно с лёгостью выбирать какие именно фрагменты сохранять, реализуя в них интерфейс [IsaveStateFragment][IsaveStateFragment]
 - [x] Простое и безболезненное расширение классов Activity 
 
 
 
 
+ [allClasses]: <https://github.com/evgenich95/CourseWork/tree/master/app/src/main/java/ru/coursework/coursework>
+ [SingleFragmentActivity]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/UI/SingleFragmentActivity.java>
+ [MakeOrderActivity]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/UI/MakeOrderActivity.java>
+ [ListOrderActivity]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/UI/ListOrderActivity.java>
+ [ISaveStateFragment]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/UI/fragment/ISaveStateFragment.java>
+ [ListOrderFragment]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/UI/fragment/ListOrderFragment.java>
+ [MakeOrderFragment]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/UI/fragment/MakeOrderFragment.java>
+ [IMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/IMemento.java>
+ [ListOrderFragmentIMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/ListOrderFragmentIMemento.java>
+ [MakeOrderFragmentIMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/MakeOrderFragmentIMemento.java>
  []: <>
  []: <>
  []: <>
- []: <>[]: <>
