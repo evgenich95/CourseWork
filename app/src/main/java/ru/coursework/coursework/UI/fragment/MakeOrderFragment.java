@@ -233,6 +233,7 @@ public class MakeOrderFragment extends Fragment implements ISaveStateFragment  {
                 dialog.setTargetFragment(MakeOrderFragment.this,REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
 
+                //генерируем новый случайный список доступных записей
                 weekOfOrders = CreateWeekOrders(date);
                 mlistView.setAdapter(new OrderAdapter(weekOfOrders));
 
