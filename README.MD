@@ -11,7 +11,7 @@
 ## Описание приложения:
 Рассмотрим конкретное приложение, на примере которого мы будем решать проблему, путём применения паттерна “Memento”.
 > Вы можете установить приложение на Android устройство и ощутить всю проблему на себе.
-> Ссылка для скачиваения apk приложения до решения проблемы: [Приложение с проблемой][appProblem]
+> Ссылка для скачиваения apk приложения до решения проблемы: [Приложение с проблемой][appWithProblem]
 
 При восстановления состояния нельзя просто загрузить данные из уровня модели, т.к. некоторые важные данные для корректного отображения представлений  создаются динамически.
 
@@ -53,7 +53,7 @@ ___
 
 ## Решение:
 
-> Вы можете скачать приложение с применённым решением: [Исправленное приложение][]
+> Вы можете скачать приложение с применённым решением: [Исправленное приложение][appWithOutProblem]
 
 Согласно паттерну “Memento”, необходимо ввести в систему 3 обязанности: _Хозяин_ (Originator), _Хранитель_ (Memento), _Опекун_ (CareTaker).
 
@@ -179,6 +179,7 @@ public void saveState() {
  [IMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/IMemento.java>
  [ListOrderFragmentIMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/ListOrderFragmentIMemento.java>
  [MakeOrderFragmentIMemento]: <https://github.com/evgenich95/CourseWork/blob/master/app/src/main/java/ru/coursework/coursework/entity/Memento/MakeOrderFragmentIMemento.java>
- [appProblem]: <https://drive.google.com/file/d/0B0KGha8XVO0LWUJQdDBYNm5fMjg/view?usp=sharing>
+ [appWithProblem]: <https://drive.google.com/file/d/0B0KGha8XVO0LWWxkWDJjUmdqWHM/view?usp=sharing>
+ [appWithOutProblem]: <https://drive.google.com/file/d/0B0KGha8XVO0LOGUwNzE5eU11a28/view?usp=sharing>
  [allStruct]: <https://github.com/evgenich95/CourseWork/blob/master/images/allStruct.png?raw=true>
- []: <>
+ 
