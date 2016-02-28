@@ -165,7 +165,7 @@ public void saveState() {
     * [MakeOrderFragmentIMemento][MakeOrderFragmentIMemento]
 - [Приложение до применения решения][appProblem]
 - [Приложение после применения решения][??????]
-- [Вся структура применяемого решения][]
+- [Вся структура применяемого решения][allStruct]
 
 
 
