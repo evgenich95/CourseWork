@@ -153,7 +153,7 @@ public void saveState() {
 
 ## Дополнение:
 - [Все классы проекта][allClasses]
-- Классы, затрунутые реализацией паттерна "Memento"
+- Классы, затронутые реализацией паттерна "Memento"
     * [SingleFragmentActivity][SingleFragmentActivity]
     * [MakeOrderActivity][MakeOrderActivity]
     * [ListOrderActivity][ListOrderActivity]
